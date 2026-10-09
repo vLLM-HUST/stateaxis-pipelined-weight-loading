@@ -1,0 +1,44 @@
+{
+  "schema_version": "vllm-hust-mod-metadata-v1",
+  "mod_id": "org.vllm-hust.stateaxis-pipelined-weight-loading",
+  "repository": "stateaxis-pipelined-weight-loading",
+  "display_name": "stateaxis-pipelined-weight-loading",
+  "canonical_repository": "https://github.com/vLLM-HUST/stateaxis-pipelined-weight-loading",
+  "responsibility": {
+    "organization": "vLLM-HUST",
+    "maintainers": [
+      {
+        "name": "Shuhao Zhang (Tony)",
+        "github": "ShuhaoZhangTony"
+      }
+    ],
+    "advisor_status": "not_declared",
+    "advisors": []
+  },
+  "lifecycle": {
+    "status": "experimental",
+    "default_enabled": false,
+    "activation_contract": "Import-only research descriptor; activation is refused until the StateAxis host contract and independent implementation are reviewed.",
+    "rollback_contract": "Disable or forget the descriptor and run the unchanged StateAxis host without this MOD."
+  },
+  "scope": {
+    "mechanism": "identity_verified_pipelined_weight_loading",
+    "supported_workloads": [],
+    "out_of_scope": [
+      "general performance claims",
+      "automatic inheritance from StateAxis aggregate evidence"
+    ]
+  },
+  "evidence": {
+    "qualification": "qualified-in-tested-cell",
+    "latest_result": "evidence/ISSUE15_WEIGHT_LOADER_RESULT.md",
+    "index": "EVIDENCE.md",
+    "performance_claims": [
+      {
+        "label": "matched-real-online-tested-cell",
+        "scope": "frozen StateAxis source evidence only",
+        "result": "Cold readiness improved in the frozen Qwen and EP8 cells without a measured warm/TPOT regression; activation remains artifact-bound."
+      }
+    ]
+  }
+}
