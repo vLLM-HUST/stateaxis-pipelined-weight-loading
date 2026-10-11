@@ -1,0 +1,34 @@
+{
+  "schema_version": "stateaxis-research-manifest/v1",
+  "mod_id": "org.vllm-hust.stateaxis-pipelined-weight-loading",
+  "mod_version": "0.2.0",
+  "mechanism": {
+    "authority": "artifact-bound Qwen2 weight loading at worker startup",
+    "candidate_policy": "pinned_double_buffer_async_v1",
+    "default_without_authority": "serial_pageable_sync",
+    "staging_slots": 2,
+    "chunk_bytes": 67108864,
+    "pack_alignment": 4096,
+    "incremental_full_byte_sha256": true,
+    "event_guarded_slot_reuse": true,
+    "execution_artifact_plan_digest_bound": true,
+    "packed_weights_root_bound": true,
+    "transactional_ready": true,
+    "fail_closed": true
+  },
+  "host_implementation": "statecentric_engine:parse_pipelined_weight_loading_additional_config",
+  "effect_evidence": [
+    "weight_load_plan_mod",
+    "weight_load_plan_sha256",
+    "weight_load_authority_requests",
+    "weight_load_authority_applied",
+    "weight_load_authority_fallbacks",
+    "worker weight-load telemetry"
+  ],
+  "qualification": {
+    "label": "matched-real-npu-qwen-cold-warm-scoped-positive",
+    "performance_qualified": false,
+    "scope": "Qwen2.5-14B cold/warm 3+3 plus MiniMax-M2.5 EP8 loader 1+1",
+    "result": "Qwen process-to-Ready -84.340% cold and -88.796% warm with TPOT gates passed; EP8 loader process time point estimate -54.748%"
+  }
+}

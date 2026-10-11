@@ -18,26 +18,29 @@
   "lifecycle": {
     "status": "experimental",
     "default_enabled": false,
-    "activation_contract": "Import-only research descriptor; activation is refused until the StateAxis host contract and independent implementation are reviewed.",
-    "rollback_contract": "Disable or forget the descriptor and run the unchanged StateAxis host without this MOD."
+    "activation_contract": "Extension Manager verifies RESEARCH_MANIFEST.json; StateAxis admits only an execution-artifact-v6-bound canonical pinned double-buffer plan and injects its validated absolute path into the worker.",
+    "rollback_contract": "Disable the extension; StateAxis strips the weight-load-plan environment from the worker and preserves the serial pageable synchronous loader."
   },
   "scope": {
     "mechanism": "identity_verified_pipelined_weight_loading",
-    "supported_workloads": [],
+    "supported_workloads": [
+      "Qwen2 artifact-bound cold and warm startup loading",
+      "validated two-slot 64 MiB pinned asynchronous H2D loading"
+    ],
     "out_of_scope": [
       "general performance claims",
       "automatic inheritance from StateAxis aggregate evidence"
     ]
   },
   "evidence": {
-    "qualification": "qualified-in-tested-cell",
-    "latest_result": "evidence/ISSUE15_WEIGHT_LOADER_RESULT.md",
+    "qualification": "matched-real-npu-qwen-cold-warm-scoped-positive",
+    "latest_result": "evidence/ecpa-contract-20261011/RESULT.json",
     "index": "EVIDENCE.md",
     "performance_claims": [
       {
-        "label": "matched-real-online-tested-cell",
-        "scope": "frozen StateAxis source evidence only",
-        "result": "Cold readiness improved in the frozen Qwen and EP8 cells without a measured warm/TPOT regression; activation remains artifact-bound."
+        "label": "matched-real-npu-qwen-cold-warm-scoped-positive",
+        "scope": "Qwen2.5-14B matched 3+3 cold/warm cells; separate MiniMax-M2.5 EP8 loader 1+1",
+        "result": "Qwen process-to-Ready improved 84.340% cold and 88.796% warm with TPOT regression gates passed; EP8 loader process-time point estimate improved 54.748%."
       }
     ]
   }
