@@ -2,41 +2,36 @@
 
 Extension ID: `org.vllm-hust.stateaxis-pipelined-weight-loading`
 
-Identity-bound staged model loading with explicit cold/warm qualification.
+Experimental, default-off authority for the StateAxis Qwen2 startup loader.
+Extension Manager/ECPA verifies the research digest. StateAxis then admits only
+a canonical `pinned_double_buffer_async_v1` plan whose SHA-256, packed-weight
+root, geometry and execution-artifact-v6 identity all agree. The validated
+absolute plan path is injected only into the child worker; without ECPA
+authority the host removes the ambient variable and the worker retains its
+`serial_pageable_sync` default.
 
-This repository is the independent MOD boundary for StateAxis issues [#15](https://github.com/Qixin-Gaoke/stateaxis/issues/15).
-It is deliberately `import_only`, default-off, and cannot be enabled. The split does
-not inherit correctness, device, performance, or publication qualification from the
-aggregate StateAxis repository.
+The candidate uses two 64 MiB pinned staging slots, incremental full-byte
+SHA-256, asynchronous H2D, event-guarded slot reuse, per-pack verification and
+transactional Ready. Any plan, artifact, root, geometry or worker-start failure
+fails closed.
 
 ## Evidence boundary
 
-Status: **scoped-positive**.
+The frozen Qwen2.5-14B real-NPU 3+3 cells measured process-to-Ready reductions
+of 84.340% cold and 88.796% warm. TPOT P50 changed +0.043% cold and -0.685%
+warm, within the pre-registered 1% regression gate. A separate MiniMax-M2.5 EP8
+loader 1+1 cell had a 54.748% process-time point estimate, but was not full-model
+serving. These are workload-scoped results, not general qualification.
 
-Cold readiness improved in the frozen Qwen and EP8 cells without a measured warm/TPOT regression; activation remains artifact-bound.
-
-The copied evidence and its SHA-256 are recorded in `PROVENANCE.json`. Negative,
-failed, and inconclusive results are retained. Microbenchmarks and component results
-must not be restated as online end-to-end gains.
-
-## Install and inspect
-
-```bash
-python -m pip install .
-vllm-hust-ext extension inspect org.vllm-hust.stateaxis-pipelined-weight-loading
-vllm-hust-ext extension check org.vllm-hust.stateaxis-pipelined-weight-loading
-```
-
-Discovery does not enable the MOD. A future active revision must extract an
-independently reviewable implementation, declare exclusive resources where needed,
-and pass exactness, lifecycle, release, failure-recovery, and matched real-online
-gates.
-
-## Validate
+Current ECPA evidence validates the activation boundary, exact identity chain,
+default-off environment stripping, ON-only worker injection, counters and
+failure closure. See `EVIDENCE.md`.
 
 ```bash
 python -m pip install -e '.[test]'
 pytest -q
+VLLM_HUST_EXT_CONFIG=evidence/ecpa-contract-20261011/manager-config.json \
+  vllm-hust-ext extension check org.vllm-hust.stateaxis-pipelined-weight-loading
 ```
 
 Maintainer: Shuhao Zhang (Tony), directly responsible; no advisor is declared.

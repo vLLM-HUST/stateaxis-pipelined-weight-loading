@@ -23,3 +23,6 @@ jobs:
       - run: pytest -q
       - run: python -m build
       - run: vllm-hust-ext extension inspect org.vllm-hust.stateaxis-pipelined-weight-loading
+      - run: VLLM_HUST_EXT_CONFIG=evidence/ecpa-contract-20261011/manager-config.json vllm-hust-ext extension check org.vllm-hust.stateaxis-pipelined-weight-loading
+      - run: VLLM_HUST_EXT_CONFIG=evidence/ecpa-contract-20261011/manager-config.json vllm-hust-ext extension plan org.vllm-hust.stateaxis-pipelined-weight-loading
+      - run: VLLM_HUST_EXT_CONFIG=evidence/ecpa-contract-20261011/manager-config.json vllm-hust-ext run --dry-run -- /bin/true

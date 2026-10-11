@@ -1,56 +1,53 @@
 {
   "schema_version": "0.3-experimental",
   "extension_id": "org.vllm-hust.stateaxis-pipelined-weight-loading",
-  "extension_version": "0.1.0.dev0",
-  "kind": "in_process_plugin",
-  "host": {
-    "provider": "stateaxis",
-    "name": "stateaxis",
-    "version_range": ">=1,<2",
-    "api_range": ">=1,<2"
-  },
-  "runtime": {
-    "type": "python",
-    "process_scope": "stateaxis-process",
-    "isolation": "trusted_in_process"
-  },
+  "extension_version": "0.2.0",
+  "kind": "control_plane_extension",
+  "host": {"provider": "stateaxis", "name": "stateaxis", "version_range": ">=1,<2", "api_range": ">=1,<2"},
+  "runtime": {"type": "python", "process_scope": "stateaxis-process", "isolation": "trusted_in_process"},
   "lifecycle_owner": "vllm",
-  "protocols": [
-    {
-      "name": "stateaxis.mod-proposal.pipelined-weight-loading",
-      "version_range": ">=1,<2"
-    }
-  ],
-  "implementation": [
-    {
-      "type": "python_module",
-      "module": "stateaxis_pipelined_weight_loading",
-      "object": "StateaxisPipelinedWeightLoadingContractProposal",
-      "status": "import_only"
-    }
-  ],
+  "protocols": [{"name": "stateaxis.mod-proposal.pipelined-weight-loading", "version_range": ">=1,<2"}],
+  "implementation": [{"type": "host_builtin", "symbol": "statecentric_engine:parse_pipelined_weight_loading_additional_config", "status": "active"}],
   "requires_services": [],
   "requires_extensions": [],
-  "resource_claims": [],
-  "components": [
-    {
-      "component_id": "stateaxis-pipelined-weight-loading",
-      "contracts": [
-        "vllm.stateaxis.mod-proposal.pipelined-weight-loading.v1"
-      ],
-      "execution_planes": [
-        "scheduler",
-        "worker",
-        "device"
-      ],
-      "isolation": "trusted_in_process",
-      "implementation_ref": "stateaxis_pipelined_weight_loading:StateaxisPipelinedWeightLoadingContractProposal",
-      "permissions": []
-    }
+  "resource_claims": [
+    {"resource": "stateaxis.worker.weight-loader", "scope": "stateaxis-process", "mode": "exclusive"},
+    {"resource": "stateaxis.device.weight-residency", "scope": "stateaxis-process", "mode": "exclusive"},
+    {"resource": "stateaxis.host.pinned-staging", "scope": "stateaxis-process", "mode": "exclusive"}
   ],
+  "components": [{
+    "component_id": "stateaxis-pipelined-weight-loading",
+    "contracts": ["vllm.stateaxis.mod-proposal.pipelined-weight-loading.v1"],
+    "execution_planes": ["worker", "device"],
+    "isolation": "trusted_in_process",
+    "implementation_ref": "statecentric_engine:parse_pipelined_weight_loading_additional_config",
+    "permissions": []
+  }],
   "activation": {
-    "entry_points": [],
+    "entry_points": [{"group": "stateaxis.mod_handlers", "name": "pipelined_weight_loading"}],
     "environment": {},
-    "additional_config": {}
+    "additional_config": {
+      "stateaxis_mod": {
+        "mod_id": "org.vllm-hust.stateaxis-pipelined-weight-loading",
+        "version": "0.2.0",
+        "manifest_sha256": "b7ee1bc4412e094cc35ab627e980e6fbb5fa7bda2ff750713a0e5167b8832096",
+        "performance_qualified": false
+      },
+      "stateaxis_pipelined_weight_loading": {
+        "enabled": true,
+        "qwen2_only": true,
+        "candidate_policy": "pinned_double_buffer_async_v1",
+        "serial_default_when_disabled": true,
+        "staging_slots": 2,
+        "chunk_bytes": 67108864,
+        "pack_alignment": 4096,
+        "incremental_full_byte_sha256": true,
+        "event_guarded_slot_reuse": true,
+        "execution_artifact_plan_digest_bound": true,
+        "packed_weights_root_bound": true,
+        "transactional_ready": true,
+        "fail_closed": true
+      }
+    }
   }
 }
