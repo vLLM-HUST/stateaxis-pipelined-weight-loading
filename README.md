@@ -27,6 +27,14 @@ Current ECPA evidence validates the activation boundary, exact identity chain,
 default-off environment stripping, ON-only worker injection, counters and
 failure closure. See `EVIDENCE.md`.
 
+A newer Qwen3.5-35B-A3B BF16 TP2 carrier diagnostic tested rank-local
+pre-sharded checkpoints on two Ascend 910B2 NPUs. Across three alternating
+same-host/same-filesystem repetitions, median process-to-Ready fell from
+337.70s to 301.62s (10.68%) and median weight iteration fell from 166.20s to
+107.15s (35.53%), with identical first-output hashes. This is promising
+workload-scoped carrier evidence only: it was not activated through ECPA, cache
+state was uncontrolled, and it makes no AgentX steady-serving claim.
+
 ```bash
 python -m pip install -e '.[test]'
 pytest -q
