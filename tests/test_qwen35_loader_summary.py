@@ -1,9 +1,17 @@
+import importlib.util
 import json
 from pathlib import Path
 
 import pytest
 
-from tools.summarize_qwen35_loader import build_summary
+ROOT = Path(__file__).resolve().parents[1]
+SPEC = importlib.util.spec_from_file_location(
+    "summarize_qwen35_loader", ROOT / "tools" / "summarize_qwen35_loader.py"
+)
+assert SPEC is not None and SPEC.loader is not None
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
+build_summary = MODULE.build_summary
 
 
 def _write_run(root: Path, name: str, ready: float, iterator: float) -> None:
