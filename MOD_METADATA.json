@@ -35,19 +35,9 @@
   },
   "evidence": {
     "qualification": "matched-real-npu-qwen-cold-warm-scoped-positive",
-    "latest_result": "evidence/qwen35-loader-sharded-qualification-20261012/RESULT.json",
+    "latest_result": "https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/evidence/qwen35-loader-sharded-qualification-20261012/RESULT.json",
     "index": "EVIDENCE.md",
-    "performance_claims": [
-      {
-        "label": "matched-real-npu-qwen-cold-warm-scoped-positive",
-        "scope": "Qwen2.5-14B matched 3+3 cold/warm cells; separate MiniMax-M2.5 EP8 loader 1+1",
-        "result": "Qwen process-to-Ready improved 84.340% cold and 88.796% warm with TPOT regression gates passed; EP8 loader process-time point estimate improved 54.748%."
-      },
-      {
-        "label": "matched-real-npu-carrier-diagnostic-not-mod-performance",
-        "scope": "Qwen3.5-35B-A3B BF16 TP2, 3+3 same-host/same-filesystem startup repetitions",
-        "result": "Median process-to-Ready improved 10.68% and median weight-iterator time improved 35.53%; ECPA activation and cache controls remain pending."
-      }
-    ]
+    "performance_claims": [],
+    "performance_claims_source": "https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/MOD_METADATA.json"
   }
 }

@@ -1,21 +1,22 @@
-# Evidence index
+# Canonical evidence
 
-- Current activation contract: `evidence/ecpa-contract-20261011/RESULT.json`
-  (`manager-contract-artifact-binding-non-performance`).
-- Frozen real-NPU result: `evidence/ISSUE15_WEIGHT_LOADER_RESULT.md`
-  (`matched-real-npu-qwen-cold-warm-scoped-positive`).
-- Qwen3.5-35B-A3B TP2 pre-sharded carrier diagnostic:
-  `evidence/qwen35-loader-sharded-qualification-20261012/RESULT.json`
-  (`matched-real-npu-carrier-diagnostic-not-mod-performance`). The three
-  same-host/same-filesystem repetitions reduced median process-to-Ready by
-  10.68% and median weight-iterator time by 35.53%, with identical first-output
-  hashes. It was not activated through ECPA and is not formal MOD performance.
+Raw measured data lives in vllm-hust-benchmark, not this MOD's Git tree.
+This is a custody migration, not a new experiment or qualification.
 
-The Qwen result is a real matched cold/warm startup result with steady-serving
-regression gates. The EP8 result validates only the loader, resource bounds and
-transactional barrier. Current mock-worker checks validate activation and
-identity propagation, not device performance.
+- [Original report and limitations](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/README.md)
+- [Original detailed evidence index](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/EVIDENCE.md)
+- [Original machine-readable claims](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/MOD_METADATA.json)
+- [Complete frozen snapshot](https://github.com/vLLM-HUST/vllm-hust-benchmark/tree/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/)
+- [Byte inventory and source identity](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/manifest.json)
 
-The Qwen3.5 carrier cell is a promotion test for TP pre-sharding. Its cache
-state and per-launch dirty state were not controlled, so it remains diagnostic
-until repeated through the Manifest 0.3 activation path.
+EVIDENCE_SOURCES.json pins the benchmark commit and manifest SHA256. The helper
+checks every downloaded file against its original length and SHA256, including
+empty or failed records. It never executes downloaded evidence. Use a cache
+outside this repository:
+
+```bash
+python tools/benchmark_evidence.py --all --destination /tmp/stateaxis-pipelined-weight-loading-evidence
+```
+
+Do not commit cache contents or new experiment outputs here. Submit evidence to
+benchmark and update the pinned source index after integrity verification.

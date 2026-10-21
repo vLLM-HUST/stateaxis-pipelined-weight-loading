@@ -1,0 +1,12 @@
+{
+  "repository": "vLLM-HUST/vllm-hust-benchmark",
+  "commit": "ddc4f6a3290e447260fc8f6c03ea36d3ca514e23",
+  "source_repository": "vLLM-HUST/stateaxis-pipelined-weight-loading",
+  "source_commit": "4079c4cc631bd101546a360eb6ab79fda3c64c89",
+  "manifest": {
+    "path": "archive/mod-git-20261021/stateaxis-pipelined-weight-loading/manifest.json",
+    "bytes": 49913,
+    "sha256": "323b6c93d382cc8a882c4cff3aa0aef6f5f12a3501fc577b6bc835265f87bbda"
+  },
+  "snapshot": "archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot"
+}
