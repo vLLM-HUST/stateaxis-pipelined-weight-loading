@@ -6,7 +6,7 @@
     15
   ],
   "source_evidence": "docs/history/reports/ISSUE15_WEIGHT_LOADER_RESULT.md",
-  "copied_evidence": "evidence/ISSUE15_WEIGHT_LOADER_RESULT.md",
+  "copied_evidence": "https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/ddc4f6a3290e447260fc8f6c03ea36d3ca514e23/archive/mod-git-20261021/stateaxis-pipelined-weight-loading/snapshot/evidence/ISSUE15_WEIGHT_LOADER_RESULT.md",
   "copied_evidence_sha256": "5c96f53fd1c934113f7df759450e55d52a7c6dca42009de6766762048ecb0641",
   "qualification_inherited": false,
   "implementation_extracted": true,
